@@ -8,5 +8,8 @@ export default defineNuxtConfig({
   ],
   tailwindcss: {
     exposeConfig: true
+  },
+  vite: {
+    logLevel: 'info'
   }
 })

@@ -42,13 +42,14 @@ export default defineNuxtModule({
     const configPath = await resolvePath(moduleOptions.configPath)
     const cssPath = moduleOptions.cssPath && resolveAlias(moduleOptions.cssPath)
     const injectPosition = ~~Math.min(moduleOptions.injectPosition, (nuxt.options.css || []).length + 1)
-
+    logger.info(`CSS path: ${cssPath}, Dirname: ${__dirname}`)
     // Include CSS file in project css
     if (typeof cssPath === 'string') {
       if (existsSync(cssPath)) {
         logger.info(`Using Tailwind CSS from ~/${relative(nuxt.options.srcDir, cssPath)}`)
         nuxt.options.css.splice(injectPosition, 0, cssPath)
       } else {
+        logger.info('Using default Tailwind CSS file from runtime/tailwind.css')
         const resolver = createResolver(import.meta.url)
         nuxt.options.css.splice(injectPosition, 0, resolver.resolve('runtime/tailwind.css'))
       }
