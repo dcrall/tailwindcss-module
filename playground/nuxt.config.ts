@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   buildModules: [
     tailwindModule
   ],
+  css: [
+    '~/assets/css/ais-components-light.css'
+  ],
   tailwindcss: {
     configPath: '@ais-public/ais-components/tailwind.config.js',
     exposeConfig: true
