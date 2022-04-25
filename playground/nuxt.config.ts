@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     tailwindModule
   ],
   tailwindcss: {
+    configPath: '@ais-public/ais-components/tailwind.config.js',
     exposeConfig: true
   },
   vite: {
