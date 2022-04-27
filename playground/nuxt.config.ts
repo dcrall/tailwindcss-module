@@ -6,12 +6,17 @@ export default defineNuxtConfig({
   buildModules: [
     tailwindModule
   ],
-  css: [
-    '~/assets/css/ais-components-light.css'
-  ],
+  css: [],
   tailwindcss: {
     configPath: '@ais-public/ais-components/tailwind.config.js',
-    exposeConfig: true
+    cssPath: '@ais-public/ais-components/src/css/tailwind.css',
+    injectPosition: 0,
+    exposeConfig: false,
+    config: {
+      content: [
+        './node_modules/@ais-public/ais-components/src/**/*.{vue,js,ts,jsx,tsx}'
+      ]
+    }
   },
   vite: {
     logLevel: 'info'

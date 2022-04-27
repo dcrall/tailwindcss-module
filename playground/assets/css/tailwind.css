@@ -1,3 +1,399 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body { @apply font-sans text-base antialiased; }
+  a { @apply text-info }
+
+  .ais-brand-bar a { @apply !text-secondary !no-underline hover:!no-underline hover:!text-secondary }
+  .ais-navbar a { @apply !text-secondary !no-underline hover:!no-underline hover:!text-secondary }
+
+  p { @apply text-lg leading-7 mb-4; }
+  .grid p:last-child { @apply mb-0; }
+
+
+  form { @apply m-0; }
+
+  /*select:focus, a:focus !*, input:focus *! {*/
+  /*  @apply focus:outline-none focus:ring-2 focus:ring-info focus:border-info focus:border-opacity-50 focus:ring-offset-0 focus:ring-opacity-40;*/
+  /*}*/
+
+  h1 { @apply text-4xl font-serif }
+  h2 { @apply text-3xl }
+  h3 { @apply text-2xl }
+  h4 { @apply text-xl }
+  h5 { @apply text-lg }
+  h6 { @apply text-base }
+
+  h1, h2, h3, h4, h5, h6 { @apply font-medium }
+}
+
+@layer components {
+  body { @apply font-sans text-base antialiased; }
+
+  .spacing-container { @apply mx-5 }
+
+  .uids-focus {
+    @apply focus:ring-2 focus:ring-offset-2 focus:ring-info focus:ring-opacity-60 focus:outline-none;
+  }
+
+  .focus-underline {
+    @apply focus:outline-none focus:underline
+  }
+
+  .profile-text { @apply text-lg }
+  .profile-text ul { @apply list-disc list-outside mx-6 my-4; }
+  .profile-text ul li { @apply mb-2; }
+  .profile-text p:last-child { @apply mb-0 }
+
+  figure.profile-image img { width: 100%; height: 100% !important; }
+
+  .striped > *:nth-child(odd) { @apply bg-white; }
+  .striped > *:nth-child(even) { @apply bg-ui-gray-50; }
+
+  .striped-reversed > *:nth-child(odd) { @apply bg-ui-gray-50; }
+  .striped-reversed > *:nth-child(even) { @apply bg-white; }
+
+
+  .bttn {
+    @apply relative inline-flex flex-nowrap gap-3 border
+    items-center justify-center
+    cursor-pointer  no-underline uppercase
+    leading-normal subpixel-antialiased outline-none;
+
+    text-decoration-width: auto;
+    text-decoration-thickness: auto;
+  }
+
+  .bttn-content {
+    @apply inline-flex flex-nowrap whitespace-nowrap items-baseline space-x-3;
+  }
+
+  .dark-border {
+    @apply border-white;
+  }
+
+  /*
+  zero-width space to force text baseline for icon-only
+  -- questionable solution
+*/
+  .bttn-content::after { content: "\200B" }
+
+  .bttn.xl { @apply py-4 px-10 text-xl }
+  .bttn.lg { @apply py-3 px-8 text-lg }
+  .bttn.md { @apply py-2.5 px-6 text-base}
+  .bttn.sm { @apply py-1.5 px-4 text-base }
+  .bttn.xs { @apply py-1 px-2 text-sm }
+
+  .bttn.sm.icon-only { @apply px-1.5 py-1 text-sm }
+  .bttn.xs.icon-only { @apply px-1.5 py-1 text-xs }
+
+  /*button.bttn.font-sans { @apply normal-case; font-variant-caps: small-caps; }*/
+  /*button.bttn.font-serif { @apply normal-case tracking-wider; font-variant-caps: small-caps; }*/
+
+  button.bttn.font-sans { @apply normal-case font-light; font-variant-caps: normal; }
+  button.bttn.font-serif { @apply normal-case tracking-wider; font-variant-caps: normal; }
+  .bttn.sans { @apply normal-case font-light; font-variant-caps: normal; }
+  .bttn.serif { @apply normal-case tracking-wider; font-variant-caps: normal; }
+
+
+  .primary { @apply text-secondary bg-ui-gold border-ui-gold }
+  .secondary { @apply text-white bg-secondary border-secondary }
+  .default { @apply text-white bg-ui-gray-cool border border-ui-gray border-opacity-70 }
+  .plain { @apply bg-transparent border-transparent; }
+  .plain.lg { @apply px-2; }
+
+  .info { @apply text-white bg-info border border-info; }
+  .success { @apply text-white bg-success border border-success; }
+  .warning { @apply text-secondary bg-warning-light border-warning }
+  .danger { @apply text-white bg-danger border border-danger; }
+
+  .primary.alternate { @apply text-secondary bg-white border-ui-gold }
+  .secondary.alternate { @apply text-gray-900 bg-white border-secondary }
+  .default.alternate { @apply text-secondary border border-ui-gray-cool border-opacity-70 bg-ui-gray-50 }
+
+  .info.alternate { @apply text-info bg-info-light border border-info; }
+  .success.alternate { @apply text-success bg-success-light border border-success; }
+  .warning.alternate { @apply text-secondary bg-warning-light border-warning }
+  .danger.alternate { @apply text-danger bg-danger-light border border-danger; }
+
+
+  /*.bttn:focus { @apply ring-2 ring-offset-2 z-10 ring-info ring-opacity-60 }*/
+  .bttn:focus { @apply focus:outline-none focus:ring-2 focus:ring-info focus:ring-offset-2 focus:ring-opacity-50; }
+  .bttn:active { @apply active:ring-0 active:outline-none active:ring-transparent }
+  .bttn:disabled { @apply cursor-default opacity-70 text-ui-gray }
+
+  .bttn.default:disabled:not(.alternate),
+  .bttn.info:disabled,
+  .bttn.success:disabled,
+  .bttn.warning:disabled,
+  .bttn.danger:disabled { @apply text-white }
+
+  .bttn.success:focus { @apply ring-success }
+  .bttn.danger:focus { @apply ring-danger }
+
+  .hover:after {
+    content: '';
+    @apply absolute bottom-0 w-full h-1 left-1/2 origin-center bg-ui-gold;
+    @apply transform scale-x-0 -translate-x-1/2;
+    @apply transition-transform duration-300 ease-in-out
+  }
+  .hover.fast:after { @apply duration-100 }
+  .hover:hover::after, .hover:focus::after { @apply transform -translate-x-1/2 scale-x-100 }
+
+  .primary.hover:after { @apply bg-secondary }
+  .secondary.hover:after { @apply bg-ui-gold }
+  .default.hover:after { @apply bg-white }
+
+  .primary.alternate.hover:after { @apply bg-ui-gold }
+  .default.alternate.hover:after { @apply bg-ui-gray-cool }
+  .plain.alternate.hover:after { @apply bg-secondary }
+
+  .info.hover:after { @apply bg-info-light }
+  .success.hover:after { @apply bg-success-light }
+  .danger.hover:after { @apply bg-danger-light }
+
+  .ui.hover:after { @apply bg-secondary}
+
+  .info.alternate.hover:after { @apply bg-info }
+  .success.alternate.hover:after { @apply bg-success }
+  .danger.alternate.hover:after { @apply bg-danger }
+
+
+  .press:active { @apply underline transform scale-99 origin-center }
+
+  /*.bttn .icon {*/
+  /*  @apply ml-2.5*/
+  /*}*/
+
+  .primary .icon:not(.icon-only) { @apply text-white }
+  .secondary .icon:not(.icon-only) { @apply text-ui-gold }
+  .tertiary .icon { @apply text-secondary}
+
+  
+  .bttn-group { @apply relative inline-flex align-middle overflow-clip; }
+  .bttn-group > .bttn { @apply relative flex-auto }
+  .bttn-group .bttn:focus { @apply ring-0 ring-offset-0 }
+
+  .bttn-group.vertical { @apply flex-col items-start justify-center }
+  .bttn-group.vertical > .bttn { @apply w-full }
+
+  .bttn-group:not(.vertical) > .bttn:first-child { @apply rounded-l-[inherit]; }
+  .bttn-group.vertical > .bttn:first-child { @apply rounded-t-[inherit]; }
+
+  .bttn-group:not(.vertical) > .bttn:last-child { @apply rounded-r-[inherit]; }
+  .bttn-group.vertical > .bttn:last-child { @apply rounded-b-[inherit]; }
+
+  .bttn-group:not(.vertical) .bttn:not(:first-child) { @apply border-l-0 }
+  .bttn-group.vertical .bttn:not(:first-child) { @apply border-t-0 }
+
+  .bttn-group .bttn.primary { @apply border-primary-separator }
+  .bttn-group .bttn.primary.active { @apply bg-secondary text-white border-secondary }
+  .bttn-group .bttn.secondary { @apply border-secondary-separator }
+  .bttn-group .bttn.secondary.active { @apply bg-ui-gold text-secondary border-secondary shadow-inner shadow-gray-400 }
+  .bttn-group .bttn.default { @apply border-default-separator }
+  .bttn-group .bttn.default.active { @apply bg-secondary text-white }
+  .bttn-group .bttn.info { @apply border-info-separator }
+  .bttn-group .bttn.info.active { @apply bg-secondary text-white }
+  .bttn-group .bttn.success { @apply border-success-separator }
+  .bttn-group .bttn.success.active { @apply bg-secondary text-white }
+  .bttn-group .bttn.warning { @apply border-warning }
+  .bttn-group .bttn.warning.active { @apply bg-secondary text-white }
+  .bttn-group .bttn.danger { @apply border-danger-separator }
+  .bttn-group .bttn.danger.active { @apply bg-secondary text-white }
+
+  .bttn-group.default { @apply bg-ui-gray-50 border-0 }
+
+
+  /* Inputs */
+  .ais-control { @apply relative; }
+
+  .ais-control input, .ais-control select, .ais-control textarea {
+    @apply appearance-none block w-full   
+    border border-secondary border-opacity-25
+    focus:outline-none focus:ring-2 focus:ring-info focus:ring-opacity-25
+    focus:border-info focus:border-opacity-25
+    focus:rounded-sm  
+    disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .invalid.ais-control input, .invalid.ais-control select,
+  .invalid.ais-control textarea {
+    @apply border-danger border-opacity-90
+    ring-1 ring-danger ring-opacity-60 rounded
+    focus:ring-danger focus:ring-2 focus:ring-opacity-50
+    focus:border-danger focus:border-opacity-90
+    focus:rounded-sm;
+  }
+
+  .ais-control input, .ais-control select {
+    @apply truncate;
+  }
+
+  .ais-control textarea {
+    @apply overflow-auto;
+  }
+
+  /*.ais-label {*/
+  /*  @apply px-1.5 focus-within:outline-none focus-within:ring-2 focus-within:ring-info focus-within:ring-opacity-50*/
+  /*  focus-within:rounded focus-within:shadow-lg;*/
+  /*}*/
+
+  /*.ais-label input[type="checkbox"],*/
+  /*.ais-label input[type="radio"] {*/
+  /*  @apply focus:outline-none;*/
+  /*}*/
+
+  .ais-label input[type="checkbox"],
+  .ais-label input[type="radio"] {
+    @apply inline-block w-4 h-4 rounded
+    focus:outline-none focus:ring-2
+    focus:ring-offset-2 focus:ring-info focus:ring-opacity-50;
+  }
+
+  .ais-control .sm { @apply py-1.5 px-2 text-base; }
+  .ais-control .md { @apply py-3 px-3.5 text-base; }
+  .ais-control .lg { @apply py-3.5 px-4 text-lg; }
+
+  .ais-control.leadingIcon input, .ais-control.leadingIcon select { @apply pl-11 }
+  .ais-control.trailingIcon input, .ais-control.trailingIcon select { @apply pr-11 }
+  .ais-control.trailingIcon select { @apply pr-16 truncate; }
+  .ais-control .econ {
+    @apply absolute inset-y-0 flex items-center pointer-events-none
+  }
+  .ais-control .econ.left { @apply left-0 pl-4 opacity-60; }
+  .ais-control .econ.right {  @apply right-0 pr-5 }
+  .ais-control select + .econ.right { @apply right-0 pr-11 }
+  .ais-control.ais-combobox input + .econ.right { @apply right-0 pr-7 }
+
+
+  .ais-control select {
+    @apply bg-white text-base pr-8;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>");
+    background-repeat: no-repeat;
+    background-origin: border-box;
+    background-size: 12px 8px;
+    background-position: right 1rem center;
+  }
+
+  .ais-field label { @apply text-lg font-serif text-secondary; }
+  .ais-field .ais-description { @apply text-base text-muted ml-1.5; }
+
+
+  table.ais {
+    @apply table border-collapse text-secondary max-w-full w-full text-left;
+    border-spacing: 0;
+  }
+  table.ais:not(.table-bordered):not(.table-outlined) { @apply w-full max-w-full }
+  table.ais.table-bordered, table.ais.table-outlined { @apply w-[calc(100%_-_2px)] max-w-[calc(100%_-_2px)] max-h-[calc(100%_-_2px)] mx-px }
+  table.ais.table-no-border-collapse { @apply border-separate }
+  table.ais tr { @apply bg-inherit }
+
+  table.ais:not(.table-bordered) th, table.ais:not(.table-bordered) td { @apply border-0 }
+  table.ais:not(.table-borderless):not(.table-sticky) { @apply divide-y divide-gray-300 }
+  table.ais:not(.table-borderless) tbody,
+  table.ais:not(.table-borderless):not(.table-sticky) thead { @apply divide-y divide-gray-200 }
+
+  /* use box-shadow instead of borders for headers and footers in sticky-header tables, since borders scroll away */
+  table.ais:not(.table-borderless).table-sticky thead tr:not(:last-child) th { box-shadow: inset 0 1px 0 rgb(209 213 219) } /* bg-gray-300 */
+  table.ais:not(.table-borderless).table-sticky tfoot tr:not(:first-child) th { box-shadow: inset 0 -1px 0 rgb(209 213 219) }
+  table.ais:not(.table-borderless).table-sticky thead tr:last-child th ,
+  table.ais:not(.table-borderless).table-sticky tfoot tr:first-child th { box-shadow: inset 0 1px 0 rgb(209 213 219), inset 0 -1px 0 rgb(209 213 219) }
+
+  table.ais:not(.table-borderless):not(.table-bordered):not(.table-outlined):not(.table-sticky) { @apply border-b border-gray-300 }
+  table.ais:not(.table-borderless):not(.table-bordered):not(.table-outlined):not(.table-sticky) thead { @apply border-t border-gray-300 }
+
+  table.ais.table-bordered:not(.table-sticky), table.ais.table-outlined:not(.table-sticky) { @apply ring-1 ring-black ring-opacity-20 }
+  table.ais.table-bordered.table-sticky, table.ais.table-outlined.table-sticky { box-shadow: 1px 0 0 rgb(209 213 219), -1px 0 0 rgb(209 213 219), inset 0 -1px 0 rgb(209 213 219), 0 1px 0 rgb(209 213 219) }
+  table.ais.table-bordered tr { @apply divide-x divide-gray-200 }
+
+  table.ais thead.bg-primary tr, table.ais thead tr.bg-primary { @apply text-secondary }
+  table.ais thead.bg-secondary tr, table.ais tfoot.bg-secondary tr,
+  table.ais thead tr.bg-secondary, table.ais tfoot tr.bg-secondary { @apply text-white }
+
+  table.ais.table-bordered thead.bg-primary tr th,
+  table.ais.table-bordered thead.bg-primary tr td,
+  table.ais.table-bordered thead tr.bg-primary th,
+  table.ais.table-bordered thead tr.bg-primary td { @apply border-0 border-l border-primary-separator }
+  table.ais.table-bordered thead.bg-primary tr th:first-child,
+  table.ais.table-bordered thead.bg-primary tr td:first-child,
+  table.ais.table-bordered thead tr.bg-primary th:first-child,
+  table.ais.table-bordered thead tr.bg-primary td:first-child { @apply border-l border-ui-gray-100 }
+
+  table.ais.table-borderless td,
+  table.ais.table-borderless th,
+  table.ais.table-borderless tr { @apply border-none border-0; }
+
+  table.ais.table-striped tbody tr:nth-of-type(even) { @apply bg-ui-gray-50 }
+  table.ais.table-striped tbody tr:nth-of-type(odd) { @apply bg-white }
+
+  table.ais.table-hover tbody tr { @apply hover:bg-ui-gray-50 }
+
+  table.ais.table-small { @apply text-sm }
+  table.ais.table-small tr:not(.filter) td, table.ais.table-small tr:not(.filter) th { @apply p-1 }
+  table.ais.table-large { @apply text-lg }
+  table.ais.table-large tr:not(.filter) td, table.ais.table-large tr:not(.filter) th { @apply p-3 }
+  table.ais:not(.table-large):not(.table-small) { @apply text-base }
+  table.ais:not(.table-large):not(.table-small) tr:not(.filter) td,
+  table.ais:not(.table-large):not(.table-small) tr:not(.filter) th { @apply p-2 }
+
+  table.ais.table-small tr.filter td, table.ais.table-small tr.filter th { @apply leading-3 }
+  table.ais:not(.table-large):not(.table-small) tr.filter td, table.ais:not(.table-large):not(.table-small) tr.filter th { @apply leading-3 }
+  table.ais.table-large tr.filter td, table.ais.table-large tr.filter th { @apply leading-4 }
+  table.ais.table-small tr.filter td .menu .menu-bttn, table.ais.table-small tr.filter th .menu .menu-bttn { @apply text-xs px-1 py-0.5 leading-3 }
+  table.ais:not(.table-large):not(.table-small) tr.filter td .menu .menu-bttn, table.ais:not(.table-large):not(.table-small) tr.filter th .menu .menu-bttn { @apply text-sm px-2 py-0.5 leading-3 }
+  table.ais.table-large tr.filter td .menu .menu-bttn, table.ais.table-large tr.filter th .menu .menu-bttn { @apply text-sm px-3 py-0.5 leading-4 }
+  table.ais tr.filter .ais-menu-dropdown { @apply text-base font-normal leading-5 }
+
+
+  .ais-list-group { @apply flex flex-col p-0 rounded }
+  .ais-list-group .ais-list-group-item { @apply leading-normal px-5 py-3 text-secondary border border-ui-gray-100 hover:no-underline }
+  .ais-list-group .ais-list-group-item:not(:first-child) { @apply border-t-0 }
+
+  .ais-list-group .ais-list-group-item.active:not(.disabled) { @apply bg-blue-500 text-white }
+  .ais-list-group .ais-list-group-item:not(.disabled) { @apply text-secondary }
+  .ais-list-group .ais-list-group-item.disabled { @apply text-gray-400 pointer-events-none }
+
+  .ais-list-group .ais-list-group-item:first-child { border-top-left-radius: inherit; border-top-right-radius: inherit; }
+  .ais-list-group .ais-list-group-item:last-child { border-bottom-left-radius: inherit; border-bottom-right-radius: inherit; }
+  .ais-list-group.flush { @apply rounded-none }
+
+  .ais-card { @apply rounded }
+  .ais-card .ais-card-body { @apply rounded }
+  .ais-card + .ais-card-header .ais-card-body { @apply rounded-t-none }
+  .ais-card + .ais-card-footer .ais-card-body { @apply rounded-b-none }
+  .ais-card-header { @apply rounded-t shadow }
+  .ais-card-footer { @apply rounded-b }
+  .ais-card-body { @apply bg-white }
+  .ais-card-header, .ais-card-body, .ais-card-footer { @apply px-4 py-2 }
+  .ais-card-body:not(.no-body) { @apply pt-2 pb-3 }
+
+  .ais-card.no-body .ais-list-group.flush .ais-list-group-item { @apply border-l-0 border-r-0 border-t-0 border-b }
+  .ais-card.no-body .ais-list-group.flush:last-child { @apply !border-b-0 }
+  .ais-card.no-body .ais-list-group.flush .ais-list-group-item:last-child { @apply border-b-0 }
+  .ais-card > .ais-list-group { border-bottom: inherit; }
+  .ais-card > .ais-list-group:last-child { @apply rounded-b }
+  .ais-card > .ais-list-group.flush + .ais-card-footer { @apply border-t-0 }
+
+  .ais-card.no-body table.ais.flush { @apply m-0 -my-px }
+  .ais-card.no-body table.ais.flush:not(.table-borderless).table-sticky thead tr:first-child th { box-shadow: 0 1px 0 rgb(209 213 219) } /* bg-gray-300 */
+  .ais-card.no-body table.ais.flush:not(.table-borderless).table-sticky thead tr:last-child:first-child th { box-shadow: 0 1px 0 rgb(209 213 219), inset 0 -1px 0 rgb(209 213 219) } /* bg-gray-300 */
+  .ais-card.no-body table.ais.flush:not(.table-borderless).table-sticky thead tr:last-child:not(:first-child) th { box-shadow: inset 0 1px 0 rgb(209 213 219), inset 0 -1px 0 rgb(209 213 219) } /* bg-gray-300 */
+  .ais-card.no-body table.ais.flush:not(.table-borderless).table-sticky tfoot tr:last-child th { box-shadow: 0 -1px 0 rgb(209 213 219) } /* bg-gray-300 */
+  .ais-card.no-body table.ais.flush:not(.table-borderless).table-sticky tfoot tr:first-child:last-child th { box-shadow: inset 0 1px 0 rgb(209 213 219), 0 -1px 0 rgb(209 213 219) } /* bg-gray-300 */
+  .ais-card.no-body table.ais.flush:not(.table-borderless).table-sticky tfoot tr:first-child:not(:last-child) th { box-shadow: inset 0 1px 0 rgb(209 213 219), inset 0 -1px 0 rgb(209 213 219) } /* bg-gray-300 */
+  .ais-card.no-body table.ais.flush.table-bordered.table-sticky,
+  .ais-card.no-body table.ais.flush.table-outlined.table-sticky { box-shadow: 1px 0 0 rgb(209 213 219), -1px 0 0 rgb(209 213 219), 0 -1px 0 rgb(209 213 219) }
+  .ais-card.no-body table.ais.flush.table-bordered, table.ais.flush.table-outlined { @apply w-full max-w-full max-h-full }
+
+  .ais-menu-dropdown { @apply min-w-[14rem] max-w-min }
+
+  .ais-footer .policy a {
+    @apply text-ui-gold hover:underline not-italic;
+  }
+}
+
+@layer utilities {
+  .text-muted { @apply text-ui-gray-cool text-opacity-95; }
+}
