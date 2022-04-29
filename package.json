@@ -26,6 +26,7 @@
     "test": "yarn lint"
   },
   "dependencies": {
+    "@ais-public/ais-components": "0.2.14",
     "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
     "@nuxt/postcss8": "^1.1.3",
     "autoprefixer": "^10.4.2",

@@ -40,15 +40,20 @@ export default defineNuxtModule({
   }),
   async setup (moduleOptions, nuxt) {
     const configPath = await resolvePath(moduleOptions.configPath)
-    const cssPath = moduleOptions.cssPath && resolveAlias(moduleOptions.cssPath)
+    const cssPath = moduleOptions.cssPath && await resolvePath(moduleOptions.cssPath)
     const injectPosition = ~~Math.min(moduleOptions.injectPosition, (nuxt.options.css || []).length + 1)
-
+    logger.info(`Dirname: ${__dirname}`)
+    logger.info(`CSS path: ${cssPath}`)
+    logger.info(`Module options: ${moduleOptions.cssPath}`)
+    logger.info(`ResolveAlias: ${await resolvePath(moduleOptions.cssPath)}`)
+    logger.info(`CSS path exists: ${existsSync(cssPath)}`)
     // Include CSS file in project css
     if (typeof cssPath === 'string') {
       if (existsSync(cssPath)) {
-        logger.info(`Using Tailwind CSS from ~/${relative(nuxt.options.srcDir, cssPath)}`)
+        logger.info(`Using Tailwind CSS from ${relative(nuxt.options.srcDir, cssPath)}`)
         nuxt.options.css.splice(injectPosition, 0, cssPath)
       } else {
+        logger.info('Using default Tailwind CSS file from runtime/tailwind.css')
         const resolver = createResolver(import.meta.url)
         nuxt.options.css.splice(injectPosition, 0, resolver.resolve('runtime/tailwind.css'))
       }
@@ -58,7 +63,7 @@ export default defineNuxtModule({
     let tailwindConfig: any = {}
     if (existsSync(configPath)) {
       tailwindConfig = requireModule(configPath, { clearCache: true })
-      logger.info(`Merging Tailwind config from ~/${relative(nuxt.options.srcDir, configPath)}`)
+      logger.info(`Merging Tailwind config from ${relative(nuxt.options.srcDir, configPath)}`)
       // Transform purge option from Array to object with { content }
       if (Array.isArray(tailwindConfig.purge)) {
         tailwindConfig.content = tailwindConfig.purge
