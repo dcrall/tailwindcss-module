@@ -1,9 +1,12 @@
 {
-  "name": "@nuxtjs/tailwindcss",
+  "name": "@ais-public/nuxt-tailwindcss",
   "version": "5.0.3",
-  "description": "TailwindCSS module for Nuxt",
+  "description": "Forked TailwindCSS module for Nuxt",
   "repository": "nuxt-community/tailwindcss-module",
   "license": "MIT",
+  "publishConfig": {
+    "@ais-public:registry": "https://git.uiowa.edu/api/v4/projects/3109/packages/npm/"
+  },
   "exports": {
     ".": {
       "require": "./dist/module.cjs",
