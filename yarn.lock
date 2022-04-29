@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@ais-public/ais-components@^0.2.13-twcss6":
-  version "0.2.13-twcss6"
-  resolved "https://git.uiowa.edu/api/v4/projects/3109/packages/npm/@ais-public/ais-components/-/@ais-public/ais-components-0.2.13-twcss6.tgz#933785642da1b40a271017fc37b43f5fc4634969"
-  integrity sha1-kzeFZC2htAonEBf8N7Q/X8RjSWk=
+"@ais-public/ais-components@0.2.14":
+  version "0.2.14"
+  resolved "https://git.uiowa.edu/api/v4/projects/3109/packages/npm/@ais-public/ais-components/-/@ais-public/ais-components-0.2.14.tgz#d79ebf448d368def88f8706cd2592eda3b464719"
+  integrity sha1-156/RI02je+I+HBs0lku2jtGRxk=
   dependencies:
     "@floating-ui/dom" "^0.3.1"
     "@fortawesome/fontawesome-svg-core" "^1.2.36"
