@@ -9,7 +9,6 @@ import {
   installModule,
   addTemplate,
   addServerMiddleware,
-  resolveAlias,
   requireModule,
   isNuxt2,
   createResolver,
@@ -40,8 +39,10 @@ export default defineNuxtModule({
   }),
   async setup (moduleOptions, nuxt) {
     const configPath = await resolvePath(moduleOptions.configPath)
-    const cssPath = moduleOptions.cssPath && resolveAlias(moduleOptions.cssPath)
+    const cssPath = moduleOptions.cssPath && await resolvePath(moduleOptions.cssPath)
     const injectPosition = ~~Math.min(moduleOptions.injectPosition, (nuxt.options.css || []).length + 1)
+
+    logger.info(`CSS path: ${cssPath}`)
 
     // Include CSS file in project css
     if (typeof cssPath === 'string') {
@@ -49,6 +50,7 @@ export default defineNuxtModule({
         logger.info(`Using Tailwind CSS from ~/${relative(nuxt.options.srcDir, cssPath)}`)
         nuxt.options.css.splice(injectPosition, 0, cssPath)
       } else {
+        logger.info('Using default Tailwind CSS file from runtime/tailwind.css')
         const resolver = createResolver(import.meta.url)
         nuxt.options.css.splice(injectPosition, 0, resolver.resolve('runtime/tailwind.css'))
       }

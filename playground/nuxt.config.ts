@@ -6,7 +6,13 @@ export default defineNuxtConfig({
   buildModules: [
     tailwindModule
   ],
+  css: [],
   tailwindcss: {
+    configPath: '@dcrall/tw-test/tailwind.config.js',
+    cssPath: '~/assets/tailwind.css',
     exposeConfig: true
+  },
+  vite: {
+    logLevel: 'info'
   }
 })
