@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   css: [],
   tailwindcss: {
     configPath: '@dcrall/tw-test/tailwind.config.js',
-    cssPath: '@dcrall/tw-test/tailwind.css',
+    cssPath: '~/assets/tailwind.css',
     exposeConfig: true
   },
   vite: {
