@@ -49,6 +49,7 @@ export default defineNuxtModule({
         logger.info(`Using Tailwind CSS from ~/${relative(nuxt.options.srcDir, cssPath)}`)
         nuxt.options.css.splice(injectPosition, 0, cssPath)
       } else {
+        logger.info('Using Tailwind CSS from module runtime')
         const resolver = createResolver(import.meta.url)
         nuxt.options.css.splice(injectPosition, 0, resolver.resolve('runtime/tailwind.css'))
       }
