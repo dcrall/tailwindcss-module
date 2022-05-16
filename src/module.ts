@@ -42,6 +42,8 @@ export default defineNuxtModule({
     const cssPath = await resolvePath(moduleOptions.cssPath, { extensions: ['.css', '.sass', '.scss', '.less', '.styl'] })
     const injectPosition = ~~Math.min(moduleOptions.injectPosition, (nuxt.options.css || []).length + 1)
 
+    logger.info(`CSS path: ${cssPath}`)
+
     // Include CSS file in project css
     if (typeof cssPath === 'string') {
       if (existsSync(cssPath)) {
