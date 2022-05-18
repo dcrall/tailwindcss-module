@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="tw-test text-4xl">
+      Hello
+    </div>
     <div>
       <CallToAction />
     </div>
